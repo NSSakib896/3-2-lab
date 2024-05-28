@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout 
 from .forms import SignupForm, LoginForm
+from django.contrib.auth.models import User
+from django.template import loader
 
+from django.http import HttpResponse
 
 # Create your views here.
 # Home page
@@ -38,3 +41,14 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('login')
+
+
+def all_user(request):
+    text = "Add"
+    template = loader.get_template('alluser.html')
+    member_list = User.objects.all().values()
+    context = {
+        'user_list': member_list,
+        
+    }
+    return HttpResponse(template.render(context, request))
