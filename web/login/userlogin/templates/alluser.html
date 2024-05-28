@@ -4,32 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css">
     <title>Document</title>
 </head>
 
 <body>
     <table id="myTable" class="display">
+        <thead>
         <tr>
             <th>id</th>
             <th>Username</th>
             <th>Email</th>
             <th>Active Status</th>
-            <th>Action</th>
+            <th>Action 1</th>
+            <th>Action 2</th>
         </tr>
+        </thead>
+        <tbody>
         {% for member in user_list %}
         <tr>
-            <td>
-                {{ member.id }}
-            </td>
-            <td>member.username</td>
-            <td>member.email</td>
-            <td>member.is_active</td>
-            <td><button>update</button> <button>delete</button></td>
+            <td>{{ member.id }}</td>
+            <td>{{member.username}}</td>
+            <td>{{member.email}}</td>
+            <td>{{member.is_active}}</td>
+            <td><button>update</button></td>
+            <td><button>delete</button></td>
         </tr>
         {% endfor %}
-        <br><br>
+    </tbody>
         
     </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="http://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
+    <script>let table = new DataTable('#myTable');</script>
     <button>Add new user</button>
 </body>
 
