@@ -52,3 +52,11 @@ def all_user(request):
         
     }
     return HttpResponse(template.render(context, request))
+
+def details(request, id):
+    mymember = User.objects.get(id=id)
+    template = loader.get_template('details.html')
+    context = {
+    'member': mymember,
+    }
+    return HttpResponse(template.render(context, request))
