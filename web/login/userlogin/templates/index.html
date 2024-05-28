@@ -1,0 +1,15 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'index_style.css' %}">
+
+{% if request.user.is_authenticated %}
+
+<p>{{ request.user.username }}</p>
+
+<li><a href="{% url 'logout' %}">Logout</a></li>
+{% else %}
+<h1>Welcome!</h1>
+<li><a href="{% url 'login' %}">Login</a></li>
+<li><a href="{% url 'signup' %}">Signup</a></li>
+<li><a href="{% url 'admin' %}">Admin login</a></li>
+{% endif %}
+
