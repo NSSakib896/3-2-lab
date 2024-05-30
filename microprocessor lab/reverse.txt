@@ -23,27 +23,36 @@ main proc
     mov ah,9
     int 21h
     
-    lea dx,string+2
-    mov ah,9
-    int 21h
     
-    lea dx,line
-    mov ah,9
-    int 21h
+    
+    ;lea dx,string+2
+    ;mov ah,9
+    ;int 21h
+    
+    
+    
     
     mov si,offset string
     add si,2
     
     mov cl,string[1]
     mov ch,0
+    ;int 21h
     
     loop1:
         mov ah,2
+        mov dl,[si]
         mov bx,[si]
         push bx
         inc si
         int 21h
     loop loop1
+    
+    lea dx,line
+    mov ah,9
+    int 21h
+    
+     
     
     mov cl,string[1]
     mov ch,0
@@ -53,6 +62,8 @@ main proc
         pop dx
         int 21h
     loop loop2
+    
+    
     
     
     
