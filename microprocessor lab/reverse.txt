@@ -1,0 +1,66 @@
+.model small
+.stack 100h
+
+.data
+
+string db 10 dup('$') 
+line db 10,13,"$"
+
+
+
+.code
+main proc
+    mov ax,@data
+    mov ds,ax
+    
+    mov ah,10
+    lea dx,string
+    mov string,6
+    int 21h 
+    
+    
+    lea dx,line
+    mov ah,9
+    int 21h
+    
+    lea dx,string+2
+    mov ah,9
+    int 21h
+    
+    lea dx,line
+    mov ah,9
+    int 21h
+    
+    mov si,offset string
+    add si,2
+    
+    mov cl,string[1]
+    mov ch,0
+    
+    loop1:
+        mov ah,2
+        mov bx,[si]
+        push bx
+        inc si
+        int 21h
+    loop loop1
+    
+    mov cl,string[1]
+    mov ch,0
+    
+    loop2:
+        mov ah,2
+        pop dx
+        int 21h
+    loop loop2
+    
+    
+    
+    mov ah,4ch
+    int 21h 
+    
+    
+    
+    
+    main endp
+end main
