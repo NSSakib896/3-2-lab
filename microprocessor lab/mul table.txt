@@ -49,20 +49,18 @@ main proc
      mov dl,'X'
      int 21h
      ;addition
+
      mov al,var2
-     sub al,1
      mov ah,0
-     add al,'1'
      aaa
      mov temp,al
-     
+     add temp,48
      mov dl,ah
      add dl,48
      
      mov ah,2
      int 21h
      
-     add temp,48
      mov dl,temp
      int 21h
      
