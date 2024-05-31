@@ -1,0 +1,95 @@
+.model small
+.stack 100h
+
+.data
+
+string db 20 dup('$')
+ 
+line db 10,13,"$"
+not_equal db 10,13,"Not equal$" 
+equal db 10,13,"equal$"
+
+
+.code
+main proc
+    mov ax,@data
+    mov ds,ax
+    
+    mov ah,10        ;input command 10
+    lea dx,string    ;load offset of string
+    mov string,19     ;number of characters to input
+    int 21h 
+    
+    
+    lea dx,line      ;don't use int 21h randomly only while performing interrupt operation
+    mov ah,9
+    int 21h
+    
+    
+    
+    ;lea dx,string+2
+    ;mov ah,9
+    ;int 21h
+    
+    
+    
+    
+    mov si,offset string
+    add si,2
+    
+    mov cl,string[1]      ;str[1]=number_of_input_characters       str[0]=number_of_defined_input_characters
+    
+    mov ch,0               
+    ;int 21h
+    
+    loop1:           ;pushing loop
+        mov ah,2
+        mov dx,[si]
+        push dx
+        inc si
+        int 21h
+    loop loop1
+    
+    lea dx,line
+    mov ah,9
+    int 21h
+     
+    
+    mov cl,string[1]    
+    mov ch,0 
+    
+        
+    mov si,offset string
+    add si,2
+    
+    loop2:
+        mov ah,2
+        pop dx
+        cmp dl,[si]
+        jne n_equal
+        inc si
+        int 21h
+    loop loop2
+    
+    mov ah,9
+    lea dx,equal
+    int 21h
+    jmp go
+    
+    
+    n_equal:
+        mov ah,9
+        lea dx,not_equal
+        int 21h
+    
+     go:
+    
+    
+    mov ah,4ch
+    int 21h 
+    
+    
+    
+    
+    main endp
+end main
