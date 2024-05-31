@@ -1,4 +1,4 @@
-.model small
+      .model small
 .stack 100h
 .data 
 msg db "enter number:$"
@@ -30,14 +30,15 @@ main proc
     aaa
     add al,'0'
     add ah,'0'
-    mov var2,ah  
+    mov var2,ah
+    mov bl,al  
     
     mov ah,2
     mov dl,var2
     int 21h 
     
     mov ah,2
-    mov dl,al
+    mov dl,bl
     int 21h
            
     
