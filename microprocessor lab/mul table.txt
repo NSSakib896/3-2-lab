@@ -4,6 +4,7 @@
 msg db "enter number:$"
 var1 db ?
 var2 db ?
+temp db ?
 line db 10,13,'$'
 
 .code
@@ -13,7 +14,7 @@ main proc
     mov ds,ax
     
     mov ah,09
-    lea dx,line
+    lea dx,msg
     int 21h
     
     mov ah,01
@@ -26,7 +27,7 @@ main proc
     mov cx,10
     mov var2,1
     loop1:
-     
+     mov ah,0
      mov al,var1
      mul var2
      aam
@@ -39,6 +40,35 @@ main proc
      lea dx,line
      int 21h
      ;formatting
+     ;4X01
+     
+     mov ah,2
+     mov dl,var1
+     add dl,48    ;4
+     int 21h
+     mov dl,'X'
+     int 21h
+     ;addition
+     mov al,var2
+     sub al,1
+     mov ah,0
+     add al,'1'
+     aaa
+     mov temp,al
+     
+     mov dl,ah
+     add dl,48
+     
+     mov ah,2
+     int 21h
+     
+     add temp,48
+     mov dl,temp
+     int 21h
+     
+     mov dl,'='
+     int 21h
+     ;addition
      
      mov ah,2
      mov dl,bh
