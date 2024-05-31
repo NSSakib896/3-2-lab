@@ -20,21 +20,23 @@ main proc
     mov var1,al
     
     mov ah,1
+    int 21h
+    mov var2,al
+    
+    mov ah,1
     int 21h 
-    
-    ;sub var1,'0'
-    ;sub al,'0'
-    
-    add al,var1 
+        
+    add al,var1
+    add al,var2 
     mov ah,0
     aaa
     add al,'0'
     add ah,'0'
-    mov var2,ah
+    mov bh,ah
     mov bl,al  
     
     mov ah,2
-    mov dl,var2
+    mov dl,bh
     int 21h 
     
     mov ah,2
